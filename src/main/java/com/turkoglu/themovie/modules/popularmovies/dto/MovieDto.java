@@ -1,6 +1,9 @@
 package com.turkoglu.themovie.modules.popularmovies.dto;
 
+import com.turkoglu.themovie.modules.shared.entity.Genre;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class MovieDto {
@@ -15,4 +18,5 @@ public class MovieDto {
     private Boolean video;
     private String posterPath;
     private String backdropPath;
+    private List<Genre> genres;
 }
