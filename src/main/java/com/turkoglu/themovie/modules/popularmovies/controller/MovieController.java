@@ -2,6 +2,7 @@ package com.turkoglu.themovie.modules.popularmovies.controller;
 
 import com.turkoglu.themovie.modules.popularmovies.service.MovieServiceImpl;
 import com.turkoglu.themovie.modules.shared.entity.Movie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,23 +18,18 @@ public class MovieController {
     }
 
     @PostMapping("/import")
-    public String importMovies(@RequestBody String jsonData) {
-        try {
-            movieServiceImpl.saveMovies(jsonData);
-            return "Movies imported successfully";
-        } catch (Exception e) {
-            return "Error importing movies: " + e.getMessage();
-        }
+    public ResponseEntity<?> importMovies() {
+        return ResponseEntity.ok(movieServiceImpl.getMoviesFromTMDBAPI());
     }
 
     // Get all movies endpoint
     @GetMapping
-    public List<Movie> getAllMovies() {
-        return movieServiceImpl.getAllMovies();
-    }
-    @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable Long id) {
-        return movieServiceImpl.getMovieById(id); // Eğer film bulunamazsa, IllegalArgumentException fırlatılabilir.
+    public ResponseEntity<List<Movie>> getAllMovies() {
+        return ResponseEntity.ok(movieServiceImpl.getAllMovies());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
+        return ResponseEntity.ok(movieServiceImpl.getMovieById(id));
+    }
 }

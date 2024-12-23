@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface MovieService {
 
-    void saveMovies(String jsonData)throws Exception ;
+    List<MoviesEntity> getMoviesFromTMDBAPI();
 
     List<Genre> getGenresFromJson(JsonNode genresNode);
 
-     List<Movie> getAllMovies();
+    List<Movie> getAllMovies();
 
-     Movie getMovieById(Long id);
+    Movie getMovieById(Long id);
 }

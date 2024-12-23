@@ -1,18 +1,22 @@
 package com.turkoglu.themovie.modules.popularmovies.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.turkoglu.themovie.modules.popularmovies.dto.MovieDto;
+import com.turkoglu.themovie.modules.popularmovies.dto.TMDBMovieResponse;
 import com.turkoglu.themovie.modules.popularmovies.mapper.MovieMapper;
-import com.turkoglu.themovie.modules.shared.entity.Movie;
 import com.turkoglu.themovie.modules.shared.entity.Genre;
+import com.turkoglu.themovie.modules.shared.entity.Movie;
 import com.turkoglu.themovie.modules.shared.repository.GenreRepository;
 import com.turkoglu.themovie.modules.shared.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -21,35 +25,32 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
-    private final MovieMapper movieMapper; // Mapper'ı enjekte ettik
+    private final MovieMapper movieMapper;
+
+    @Value("${tmdb.api.key}")
+    private String key;
 
     @Override
-    public void saveMovies(String jsonData) throws Exception {
-        JsonNode jsonNode = new ObjectMapper().readTree(jsonData);
-        Iterator<JsonNode> results = jsonNode.get("results").elements();
-        while (results.hasNext()) {
-            JsonNode movieNode = results.next();
+    public List<MoviesEntity> getMoviesFromTMDBAPI() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 
-            // MovieDto'yu manuel olarak mapliyoruz
-            MovieDto movieDto = new MovieDto();
-            movieDto.setTitle(movieNode.get("title").asText());
-            movieDto.setOriginalTitle(movieNode.get("original_title").asText());
-            movieDto.setOverview(movieNode.get("overview").asText());
-            movieDto.setReleaseDate(movieNode.get("release_date").asText());
-            movieDto.setPopularity(movieNode.get("popularity").asDouble());
-            movieDto.setVoteAverage(movieNode.get("vote_average").asDouble());
-            movieDto.setVoteCount(movieNode.get("vote_count").asInt());
-            movieDto.setAdult(movieNode.get("adult").asBoolean());
-            movieDto.setVideo(movieNode.get("video").asBoolean());
+        // HTTP başlıklarını oluştur
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("accept", "application/json");
+        headers.set("Authorization", "Bearer " + key);
 
-            // Genre'leri işliyoruz
-            List<Genre> genres = getGenresFromJson(movieNode.get("genre_ids"));
-            movieDto.setGenres(genres);
+        // HTTP isteği için entity oluştur
+        HttpEntity<String> entity = new HttpEntity<>(headers);
 
-            // MapStruct ile Movie'yi oluşturuyoruz
-            Movie movie = movieMapper.toMovie(movieDto);
-            movieRepository.save(movie);
-        }
+        // GET isteği gönder
+        ResponseEntity<TMDBMovieResponse> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                entity,
+                TMDBMovieResponse.class
+        );
+        return movieMapper.mapToMoviesEntity(response.getBody().getResults());
     }
 
     @Override
