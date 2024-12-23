@@ -8,7 +8,7 @@ import com.turkoglu.themovie.modules.shared.entity.Movie;
 import com.turkoglu.themovie.modules.shared.entity.Genre;
 import com.turkoglu.themovie.modules.shared.repository.GenreRepository;
 import com.turkoglu.themovie.modules.shared.repository.MovieRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
