@@ -3,6 +3,8 @@ package com.turkoglu.themovie.modules.shared.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class Movie {
@@ -21,4 +23,11 @@ public class Movie {
     private Integer voteCount;
     private Boolean adult;
     private Boolean video;
+    @ManyToMany
+    @JoinTable(
+            name = "movie_genre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres;
 }

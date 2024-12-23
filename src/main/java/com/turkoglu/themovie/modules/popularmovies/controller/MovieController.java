@@ -1,6 +1,6 @@
 package com.turkoglu.themovie.modules.popularmovies.controller;
 
-import com.turkoglu.themovie.modules.popularmovies.service.MovieService;
+import com.turkoglu.themovie.modules.popularmovies.service.MovieServiceImpl;
 import com.turkoglu.themovie.modules.shared.entity.Movie;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +10,16 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private final MovieService movieService;
+    private final MovieServiceImpl movieServiceImpl;
 
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
+    public MovieController(MovieServiceImpl movieServiceImpl) {
+        this.movieServiceImpl = movieServiceImpl;
     }
 
     @PostMapping("/import")
     public String importMovies(@RequestBody String jsonData) {
         try {
-            movieService.saveMovies(jsonData);
+            movieServiceImpl.saveMovies(jsonData);
             return "Movies imported successfully";
         } catch (Exception e) {
             return "Error importing movies: " + e.getMessage();
@@ -29,6 +29,11 @@ public class MovieController {
     // Get all movies endpoint
     @GetMapping
     public List<Movie> getAllMovies() {
-        return movieService.getAllMovies();
+        return movieServiceImpl.getAllMovies();
     }
+    @GetMapping("/{id}")
+    public Movie getMovieById(@PathVariable Long id) {
+        return movieServiceImpl.getMovieById(id); // Eğer film bulunamazsa, IllegalArgumentException fırlatılabilir.
+    }
+
 }
