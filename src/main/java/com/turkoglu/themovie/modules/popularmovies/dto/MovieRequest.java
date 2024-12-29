@@ -1,20 +1,19 @@
 package com.turkoglu.themovie.modules.popularmovies.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.turkoglu.themovie.modules.popularmovies.entity.Genre;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class Movies {
+public class MovieRequest {
     @JsonProperty("adult")
     private boolean adult;
     @JsonProperty("backdrop_path")
     private String backdropPath;
     @JsonProperty("genre_ids")
     private List<Integer> genreIds;
-    @JsonProperty("id")
-    private int id;
     @JsonProperty("original_language")
     private String originalLanguage;
     @JsonProperty("original_title")

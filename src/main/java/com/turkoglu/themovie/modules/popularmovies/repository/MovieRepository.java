@@ -1,9 +1,8 @@
-package com.turkoglu.themovie.modules.shared.repository;
+package com.turkoglu.themovie.modules.popularmovies.repository;
 
-import com.turkoglu.themovie.modules.shared.entity.Movie;
+import com.turkoglu.themovie.modules.popularmovies.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {

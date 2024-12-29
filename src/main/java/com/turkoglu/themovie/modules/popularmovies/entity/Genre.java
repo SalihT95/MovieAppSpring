@@ -1,20 +1,19 @@
-package com.turkoglu.themovie.modules.shared.entity;
+package com.turkoglu.themovie.modules.popularmovies.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
+@Table(name = "genres")
 public class Genre {
 
     @Id
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(mappedBy = "genres")

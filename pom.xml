@@ -26,9 +26,11 @@
 		<tag/>
 		<url/>
 	</scm>
+
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+
 	<dependencies>
 		<!-- Spring Boot Starter: Temel Spring altyapısı -->
 		<dependency>
@@ -36,20 +38,21 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
+		<!-- Springdoc OpenAPI: API Dokümantasyonu -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.3.0</version>
 		</dependency>
 
-
+		<!-- Spring Boot Starter Test: Testler için gerekli bağımlılıklar -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Spring Web: REST API geliştirme -->
+		<!-- Spring Boot Starter Web: REST API geliştirme -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -83,17 +86,14 @@
 			<optional>true</optional>
 		</dependency>
 
-
 		<!-- MapStruct: DTO ile Entity arasında dönüşüm -->
-
-		<!-- MapStruct Dependency -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.5.Final</version>
 		</dependency>
 
-		<!-- MapStruct Processor Dependency for Compile-Time Code Generation -->
+		<!-- MapStruct Processor: Compile-Time Kod Üretimi -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
@@ -101,16 +101,29 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Spring Boot Starter Validation: Veri doğrulama -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
+
+<!--		&lt;!&ndash; Spring Boot Starter Security: Güvenlik &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Jackson Datatype for JSR-310: Java 8 tarih ve saat desteği &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>com.fasterxml.jackson.datatype</groupId>-->
+<!--			<artifactId>jackson-datatype-jsr310</artifactId>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Spring Boot Actuator: Uygulama izleme &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--		</dependency>-->
 
 	</dependencies>
 	<build>

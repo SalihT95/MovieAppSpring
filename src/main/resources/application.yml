@@ -5,15 +5,17 @@ tmdb:
 spring:
   application:
     name: "themovie"
+
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;database=movieSpringApp;encrypt=false;trustServerCertificate=true
     username: sa
     password: l£0Ar407Eg
+
   jpa:
     hibernate:
-      ddl-auto: "update"
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        dialect: "org.hibernate.dialect.SQLServerDialect"
+        dialect: org.hibernate.dialect.SQLServerDialect
