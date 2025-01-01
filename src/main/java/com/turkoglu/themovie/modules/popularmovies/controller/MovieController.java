@@ -34,18 +34,10 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responses);
     }
 
-    // Çoklu film kaydetme
-//    @PostMapping
-//    @Operation(summary = "Toplu film oluştur v2", description = "Birden fazla film bilgisi ile toplu film oluşturur.")
-//    public ResponseEntity<List<MovieResponse>> saveMovies(@RequestBody List<MovieRequest> requests) {
-//        List<MovieResponse> responses = movieService.saveMovies(requests);
-//        return ResponseEntity.ok(responses);
-//    }
-
     @PostMapping("/add")
     @Operation(summary = "Tek film oluştur", description = "Bir film oluşturur.")
     public ResponseEntity<MovieResponse> createMovie(@RequestBody MovieRequest request) {
-        MovieResponse response = movieService.createMovie(request);
+        MovieResponse response = movieService.saveMovie(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

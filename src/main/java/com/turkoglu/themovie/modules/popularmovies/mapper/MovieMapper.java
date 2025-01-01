@@ -15,14 +15,12 @@ import java.util.stream.Collectors;
 public interface MovieMapper {
 
     @Mappings({
-            @Mapping(target = "id", ignore = true)  // ID'yi ignore et, çünkü veritabanında otomatik oluşturulacak
+            @Mapping(target = "id", ignore = true)
     })
     Movie toEntity(MovieRequest request);
 
     @Mapping(target = "genreNames", expression = "java(mapGenres(movie.getGenres()))")
     MovieResponse toResponse(Movie movie);
-
-    List<MovieResponse> toResponseList(List<Movie> movies);
 
     default List<String> mapGenres(List<Genre> genres) {
         if (genres == null) {

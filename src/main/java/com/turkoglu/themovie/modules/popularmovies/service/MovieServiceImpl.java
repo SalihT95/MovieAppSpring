@@ -24,24 +24,8 @@ public class MovieServiceImpl implements MovieService {
     private String apiKey;
 
     private final MovieRepository movieRepository;
-    private final GenreRepository genreRepository;
     private final MovieMapper movieMapper;
     private final GenreService genreService;
-
-    // Çoklu film kaydetme
-//    @Override
-//    public List<MovieResponse> saveMovies(List<MovieRequest> requests) {
-//        // MovieRequest'leri Movie entity'lerine dönüştür
-//        List<Movie> movies = requests.stream()
-//                .map(movieMapper::toEntity)  // MapStruct kullanarak dönüştür
-//                .collect(Collectors.toList());
-//
-//        // Filmleri kaydet
-//        List<Movie> savedMovies = movieRepository.saveAll(movies);
-//
-//        // Kaydedilen filmleri MovieResponse formatına dönüştür
-//        return movieMapper.toResponseList(savedMovies);  // MapStruct kullanarak dönüşüm
-//    }
 
     @Override
     public List<MovieResponse> saveMovies(List<MovieRequest> requests) {
@@ -66,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
 
 
     @Override
-    public MovieResponse createMovie(MovieRequest request) {
+    public MovieResponse saveMovie(MovieRequest request) {
         Movie movie = movieMapper.toEntity(request);
         List<Genre> genres = genreService.findGenresByIds(request.getGenreIds());
         movie.setGenres(genres);

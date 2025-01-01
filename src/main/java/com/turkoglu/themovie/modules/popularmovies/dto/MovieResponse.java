@@ -13,5 +13,5 @@ public class MovieResponse {
     private double voteAverage;
     private String releaseDate;
     private String posterPath;
-    private List<String> genreNames; // Genre isimlerini döndürelim.
+    private List<String> genreNames;
 }

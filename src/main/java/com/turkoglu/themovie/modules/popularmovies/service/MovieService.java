@@ -7,8 +7,9 @@ import java.util.List;
 
 
 public interface MovieService {
-    MovieResponse createMovie(MovieRequest request);
+    MovieResponse saveMovie(MovieRequest request);
+    List<MovieResponse> saveMovies(List<MovieRequest> requests);
     MovieResponse getMovieById(Long id);
     List<MovieResponse> getAllMovies();
-    List<MovieResponse> saveMovies(List<MovieRequest> requests);
+
 }
