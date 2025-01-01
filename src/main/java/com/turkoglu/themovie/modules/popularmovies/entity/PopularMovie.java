@@ -1,16 +1,15 @@
 package com.turkoglu.themovie.modules.popularmovies.entity;
 
+import com.turkoglu.themovie.modules.shared.entity.Genre;
 import lombok.Data;
-
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "movies")
-public class Movie {
+public class PopularMovie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

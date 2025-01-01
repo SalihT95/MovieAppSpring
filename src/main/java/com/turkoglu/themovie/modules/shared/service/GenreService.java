@@ -1,7 +1,7 @@
-package com.turkoglu.themovie.modules.popularmovies.service;
+package com.turkoglu.themovie.modules.shared.service;
 
-import com.turkoglu.themovie.modules.popularmovies.entity.Genre;
-import com.turkoglu.themovie.modules.popularmovies.repository.GenreRepository;
+import com.turkoglu.themovie.modules.shared.entity.Genre;
+import com.turkoglu.themovie.modules.shared.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

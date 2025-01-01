@@ -1,13 +1,12 @@
 package com.turkoglu.themovie.modules.popularmovies.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.turkoglu.themovie.modules.popularmovies.entity.Genre;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class MovieRequest {
+public class PopularMovieRequest {
     @JsonProperty("adult")
     private boolean adult;
     @JsonProperty("backdrop_path")

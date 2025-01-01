@@ -1,5 +1,6 @@
-package com.turkoglu.themovie.modules.popularmovies.entity;
+package com.turkoglu.themovie.modules.shared.entity;
 
+import com.turkoglu.themovie.modules.popularmovies.entity.PopularMovie;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,5 +18,5 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
-    private List<Movie> movies;
+    private List<PopularMovie> movies;
 }

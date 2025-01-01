@@ -1,6 +1,6 @@
-package com.turkoglu.themovie.modules.popularmovies.repository;
+package com.turkoglu.themovie.modules.shared.repository;
 
-import com.turkoglu.themovie.modules.popularmovies.entity.Genre;
+import com.turkoglu.themovie.modules.shared.entity.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
 package com.turkoglu.themovie.modules.popularmovies.mapper;
 
-import com.turkoglu.themovie.modules.popularmovies.dto.MovieRequest;
-import com.turkoglu.themovie.modules.popularmovies.dto.MovieResponse;
-import com.turkoglu.themovie.modules.popularmovies.entity.Genre;
-import com.turkoglu.themovie.modules.popularmovies.entity.Movie;
+import com.turkoglu.themovie.modules.popularmovies.dto.PopularMovieRequest;
+import com.turkoglu.themovie.modules.popularmovies.dto.PopularMovieResponse;
+import com.turkoglu.themovie.modules.shared.entity.Genre;
+import com.turkoglu.themovie.modules.popularmovies.entity.PopularMovie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface MovieMapper {
+public interface PopularMovieMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    Movie toEntity(MovieRequest request);
+    PopularMovie toEntity(PopularMovieRequest request);
 
     @Mapping(target = "genreNames", expression = "java(mapGenres(movie.getGenres()))")
-    MovieResponse toResponse(Movie movie);
+    PopularMovieResponse toResponse(PopularMovie movie);
 
     default List<String> mapGenres(List<Genre> genres) {
         if (genres == null) {
