@@ -1,4 +1,4 @@
-package com.turkoglu.themovie.modules.popularmovies.entity;
+package com.turkoglu.themovie.modules.nowplaying.entity;
 
 import com.turkoglu.themovie.modules.shared.entity.Genre;
 import lombok.Data;
@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "popular_movies")
-public class PopularMovie {
+@Table(name = "now_playing_movies")
+public class NowPlayingMovie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +38,15 @@ public class PopularMovie {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "popular_movie_genre",
-            joinColumns = @JoinColumn(name = "popular_movie_id"),
+            name = "now_playing_movie_genre",
+            joinColumns = @JoinColumn(name = "now_playing_movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private List<Genre> genres = new ArrayList<>();
+
+    @Column(name = "date_range_maximum")
+    private String dateRangeMaximum;
+
+    @Column(name = "date_range_minimum")
+    private String dateRangeMinimum;
 }

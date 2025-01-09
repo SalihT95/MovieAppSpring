@@ -7,6 +7,7 @@ import com.turkoglu.themovie.modules.popularmovies.entity.PopularMovie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,15 +18,13 @@ public interface PopularMovieMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    PopularMovie toEntity(PopularMovieRequest request);
+    PopularMovie toEntity(PopularMovieRequest.PopularMovieResult request);
 
-    @Mapping(target = "genreNames", expression = "java(mapGenres(movie.getGenres()))")
+    @Mapping(target = "genreNames", source = "genres", qualifiedByName = "mapGenresToNames")
     PopularMovieResponse toResponse(PopularMovie movie);
 
-    default List<String> mapGenres(List<Genre> genres) {
-        if (genres == null) {
-            return null;
-        }
+    @Named("mapGenresToNames")
+    default List<String> mapGenresToNames(List<Genre> genres) {
         return genres.stream()
                 .map(Genre::getName)
                 .collect(Collectors.toList());

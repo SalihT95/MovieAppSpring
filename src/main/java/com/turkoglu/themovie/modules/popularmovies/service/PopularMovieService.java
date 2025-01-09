@@ -7,8 +7,7 @@ import java.util.List;
 
 
 public interface PopularMovieService {
-    PopularMovieResponse saveMovie(PopularMovieRequest request);
-    List<PopularMovieResponse> saveMovies(List<PopularMovieRequest> requests);
+    void saveMovies(PopularMovieRequest requests);
     PopularMovieResponse getMovieById(Long id);
     List<PopularMovieResponse> getAllMovies();
 

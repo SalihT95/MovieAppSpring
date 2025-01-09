@@ -14,44 +14,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 @RequiredArgsConstructor
 public class PopularMovieServiceImpl implements PopularMovieService {
-
-    @Value("${tmdb.api.key}")
-    private String apiKey;
 
     private final PopularMovieRepository popularMovieRepository;
     private final PopularMovieMapper popularMovieMapper;
     private final GenreService genreService;
 
     @Override
-    public List<PopularMovieResponse> saveMovies(List<PopularMovieRequest> requests) {
-        List<PopularMovie> movies = requests.stream()
-                .map(request -> {
-                    PopularMovie movie = popularMovieMapper.toEntity(request);
-                    List<Genre> genres = genreService.findGenresByIds(request.getGenreIds());
+    public void saveMovies(PopularMovieRequest movieRequest) {
+        List<PopularMovie> movies = movieRequest.getResults().stream()
+                .map(movieResult -> {
+
+                    PopularMovie movie = popularMovieMapper.toEntity(movieResult);
+
+                    List<Genre> genres = genreService.findGenresByIds(movieResult.getGenreIds());
                     movie.setGenres(genres);
+
                     return movie;
                 })
                 .collect(Collectors.toList());
 
-        List<PopularMovie> savedMovies = popularMovieRepository.saveAll(movies);
-
-        return savedMovies.stream()
-                .map(popularMovieMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
-
-    @Override
-    public PopularMovieResponse saveMovie(PopularMovieRequest request) {
-        PopularMovie movie = popularMovieMapper.toEntity(request);
-        List<Genre> genres = genreService.findGenresByIds(request.getGenreIds());
-        movie.setGenres(genres);
-        PopularMovie savedMovie = popularMovieRepository.save(movie);
-        return popularMovieMapper.toResponse(savedMovie);
+        popularMovieRepository.saveAll(movies);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.turkoglu.themovie.modules.shared.entity;
 
+import com.turkoglu.themovie.modules.nowplaying.entity.NowPlayingMovie;
 import com.turkoglu.themovie.modules.popularmovies.entity.PopularMovie;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -18,5 +18,8 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
-    private List<PopularMovie> movies;
+    private List<NowPlayingMovie> nowPlayingMovies;
+
+    @ManyToMany(mappedBy = "genres")
+    private List<PopularMovie> popularMovies;
 }

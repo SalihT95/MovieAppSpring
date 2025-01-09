@@ -1,18 +1,19 @@
-package com.turkoglu.themovie.modules.popularmovies.dto;
+package com.turkoglu.themovie.modules.nowplaying.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.turkoglu.themovie.modules.nowplaying.dto.NowPlayingMovieRequest;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
-public class PopularMovieRequest {
+public class NowPlayingMovieRequest {
+    @JsonProperty("dates")
+    private DateRange dateRange;
+
     @JsonProperty("page")
     private int page;
 
     @JsonProperty("results")
-    private List<PopularMovieResult> results;
+    private List<NowPlayingMovieResult> results;
 
     @JsonProperty("total_pages")
     private int totalPages;
@@ -20,9 +21,17 @@ public class PopularMovieRequest {
     @JsonProperty("total_results")
     private int totalResults;
 
+    @Data
+    public static class DateRange {
+        @JsonProperty("maximum")
+        private String maximum;
+
+        @JsonProperty("minimum")
+        private String minimum;
+    }
 
     @Data
-    public static class PopularMovieResult {
+    public static class NowPlayingMovieResult {
         @JsonProperty("id")
         private int id;
 
